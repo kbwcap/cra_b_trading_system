@@ -5,7 +5,7 @@
 #include "KiwerAPI.h"
 #include "NemoAPI.h"
 #include "StockTradingSystem.h"
-#include "gmock/gmock.h"
+#include "MockNemoStock.h"
 
 using namespace testing;
 using namespace std;
@@ -75,9 +75,9 @@ bool | | +getPrice(stockCode) : double | +getPrice(stockCode) : double |
 
 */
 
-class StockTradingSystemTest : public ::testing::Test {
- protected:
-  StockTradingSystem system;
+class StockTradingSystemTest : public Test {
+protected:
+    StockTradingSystem system;
 };
 
 #ifdef Release  // Kiwer 증권사 테스트 (Real)
@@ -211,16 +211,19 @@ TEST_F(MockKiwerFixture, MockKiwerCurrentPrice) {
 
 // Nemo 증권사 테스트
 TEST_F(StockTradingSystemTest, TestNemoLogin) {
-  // MockNemoStock mockNemo;
-  system.selectStockBroker(false);  // Nemo 선택
+    MockNemoStock mockNemo;
+    StockTradingSystem system;
 
-  // EXPECT_CALL(mockNemo, login("박화영", "1234"))
-  //     .WillOnce(::testing::Return(true));
+    system.setBrokerForTest(&mockNemo);  // 테스트용 mock 직접 설정
 
-  // EXPECT_TRUE(system.login("박화영", "1245"));
+    EXPECT_CALL(mockNemo, login("박화영", "1234"))
+        .Times(1)
+        .WillOnce(Return(true));
+
+    EXPECT_TRUE(system.login("박화영", "1234"));  // 인자 일치해야 함
 }
 
 int main() {
-  ::testing::InitGoogleMock();
-  return RUN_ALL_TESTS();
+	InitGoogleMock();
+	return RUN_ALL_TESTS();
 }
