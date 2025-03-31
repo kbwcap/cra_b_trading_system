@@ -1,14 +1,22 @@
 #pragma once
-#include <iostream>
 #include <cstdlib>
+#include <iostream>
 #include <string>
 
 using namespace std;
-class KiwerAPI {
+
+class IKiwerAPI {
 public:
-	void login(string ID, string password) {
-		cout << ID << " login success\n";
-	}
+	virtual ~IKiwerAPI() = default;
+	virtual void login(string ID, string password) = 0;
+	virtual void buy(string stockCode, int count, int price) = 0;
+	virtual void sell(string stockCode, int count, int price) = 0;
+	virtual int currentPrice(string stockCode) = 0;
+};
+
+class KiwerAPI : public IKiwerAPI {
+public:
+	void login(string ID, string password) { cout << ID << " login success\n"; }
 
 	void buy(string stockCode, int count, int price) {
 		cout << stockCode << " : Buy stock ( " << price << " * " << count << ")\n";
