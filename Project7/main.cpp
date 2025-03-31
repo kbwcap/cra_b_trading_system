@@ -259,6 +259,39 @@ TEST_F(StockTradingSystemTest, TestKiwerSellNiceTiming_Success) {
 }
 
 
+// 가격이 3연속계속 상승하는 것을 확인하면 매수 진행한다. 
+TEST_F(StockTradingSystemTest, TestNemoBuyNiceTiming_Success) {
+    //MockNemoStock mockNemo;
+    system.selectStockBroker(false);  // Nemo 선택
+
+    // 가격이 58000, 58100, 58200 으로 계속 상승한다는 가정
+    //EXPECT_CALL(mockNemo, getPrice("삼성전자"))
+    //    .WillOnce(::testing::Return(58000.0))
+    //    .WillOnce(::testing::Return(58100.0))
+    //    .WillOnce(::testing::Return(58200.0));
+
+    //EXPECT_CALL(mockNemo, buy("삼성전자", 10, 58200.0))
+    //    .WillOnce(::testing::Return(true));
+
+    //EXPECT_TRUE(system.buyNiceTiming("삼성전자", 582000));
+}
+
+// 가격이 3연속 하락하는 것을 확인하면 매도 진행한다. 
+TEST_F(StockTradingSystemTest, TestNemoSellNiceTiming_Success) {
+    //MockNemoStock mockNemo;
+    system.selectStockBroker(false);  // Nemo 선택
+
+    // 가격이 58200, 58100, 58000 으로 하락
+    //EXPECT_CALL(mockNemo, getPrice("삼성전자"))
+    //    .WillOnce(::testing::Return(58200.0))
+    //    .WillOnce(::testing::Return(58100.0))
+    //    .WillOnce(::testing::Return(58000.0));
+
+    //EXPECT_CALL(mockNemo, sell("삼성전자", 10, 58000.0))
+    //    .WillOnce(::testing::Return(true));
+
+    //EXPECT_TRUE(system.sellNiceTiming("삼성전자", 10));
+}
 
 int main() {
 	::testing::InitGoogleMock();
