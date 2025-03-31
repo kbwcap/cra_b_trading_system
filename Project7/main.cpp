@@ -150,6 +150,41 @@ TEST_F(StockTradingSystemTest, TestNemoGetPrice) {
     //EXPECT_EQ(system.getPrice("AAPL"), 58200.0);
 }
 
+// 로그인 로직이 실패한 경우 예외 던짐
+// 로그인 정보가 유효하지 않은 경우.
+TEST_F(StockTradingSystemTest, TestKiwerLogin_Failure) {
+    //KiwerStock mockKiwer;
+    system.selectStockBroker(true);  // Kiwer 선택
+
+    //EXPECT_THROW(mockKiwer.login("", ""), LoginException);
+}
+
+// 매수수량 및 단가가 음수인 경우 예외처리
+// 종목 code가 비어 있는 경우 예외처리
+TEST_F(StockTradingSystemTest, TestKiwerBuy_Failure) {
+    //KiwerStock mockKiwer;
+    system.selectStockBroker(true);  // Kiwer 선택
+
+    //EXPECT_THROW(mockKiwer.buy("삼성전자", -10, 58000.0), BuyException);
+}
+
+// 매도수량 및 단가가 음수인 경우 예외처리
+// 종목 code가 비어 있는 경우 예외처리
+TEST_F(StockTradingSystemTest, TestKiwerSell_Failure) {
+    //KiwerStock mockKiwer;
+    system.selectStockBroker(true);  // Kiwer 선택
+
+    //EXPECT_THROW(mockKiwer.sell("삼성전자", 58000.0, -100), SellException);
+}
+
+
+// 종목 code가 비어 있는 경우 예외 처리 
+TEST_F(StockTradingSystemTest, TestKiwerGetPrice_Failure) {
+    //KiwerStock mockKiwer;
+    system.selectStockBroker(true);  // Kiwer 선택
+
+    //EXPECT_THROW(mockKiwer.getPrice(""), PriceException);
+}
 
 
 int main() {
