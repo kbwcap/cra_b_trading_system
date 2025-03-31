@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>     %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,12 +130,18 @@
   <ItemGroup>
     <ClCompile Include="KiwerAPI.h" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NemoStock.cpp" />
+    <ClCompile Include="StockBrokerInterface.cpp" />
+    <ClCompile Include="StockTradingSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MockNemoStock.h" />
     <ClInclude Include="NemoAPI.h" />
+    <ClInclude Include="NemoStock.h" />
+    <ClInclude Include="StockBrokerInterface.h" />
     <ClInclude Include="StockTradingSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

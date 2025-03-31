@@ -5,12 +5,10 @@
 #include "NemoAPI.h"
 #include "KiwerAPI.h"
 #include "StockTradingSystem.h"
+#include "MockNemoStock.h"
 
 using namespace testing;
 using namespace std;
-
-
-
 
 /**
 * stockTradingSystem : 핵심 클래스 
@@ -77,38 +75,27 @@ using namespace std;
 
 */
 
-class StockTradingSystemTest : public ::testing::Test {
+class StockTradingSystemTest : public Test {
 protected:
     StockTradingSystem system;
-    
 };
-
-
-
-
-// Kiwer 증권사 테스트
-TEST_F(StockTradingSystemTest, TestKiwerLogin) {
-    //MockKiwerStock mockKiwer;
-    system.selectStockBroker(true);  // Kiwer 선택
-
-    //EXPECT_CALL(mockKiwer, login("김윤제", "1245"))
-    //    .WillOnce(::testing::Return(true));  // 성공적으로 로그인
-
-    //EXPECT_TRUE(system.login("김윤제", "1245"));
-}
 
 // Nemo 증권사 테스트
 TEST_F(StockTradingSystemTest, TestNemoLogin) {
-    //MockNemoStock mockNemo;
-    system.selectStockBroker(false);  // Nemo 선택
+    MockNemoStock mockNemo;
+    StockTradingSystem system;
 
-    //EXPECT_CALL(mockNemo, login("박화영", "1234"))
-    //    .WillOnce(::testing::Return(true));
+    system.setBrokerForTest(&mockNemo);  // 테스트용 mock 직접 설정
 
-    //EXPECT_TRUE(system.login("박화영", "1245"));
+    EXPECT_CALL(mockNemo, login("박화영", "1234"))
+        .Times(1)
+        .WillOnce(Return(true));
+
+    EXPECT_TRUE(system.login("박화영", "1234"));  // 인자 일치해야 함
 }
 
+
 int main() {
-	::testing::InitGoogleMock();
+	InitGoogleMock();
 	return RUN_ALL_TESTS();
 }
