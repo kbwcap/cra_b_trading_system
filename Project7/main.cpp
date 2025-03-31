@@ -187,6 +187,43 @@ TEST_F(StockTradingSystemTest, TestKiwerGetPrice_Failure) {
 }
 
 
+
+// 로그인 로직이 실패한 경우 예외 던짐
+// 로그인 정보가 유효하지 않은 경우.
+TEST_F(StockTradingSystemTest, TestNemoLogin_Failure) {
+    //MockNemoStock mockNemo;
+    system.selectStockBroker(false);  // Nemo 선택
+
+    //EXPECT_THROW(mockNemo.login("", ""), LoginException);
+}
+
+// 매수수량 및 단가가 음수인 경우 예외처리
+// 종목 code가 비어 있는 경우 예외처리
+TEST_F(StockTradingSystemTest, TestNemoBuy_Failure) {
+    //MockNemoStock mockNemo;
+    system.selectStockBroker(false);  // Nemo 선택
+
+    //EXPECT_THROW(mockNemo.buy("삼성전자", -10, 58000.0), BuyException);
+}
+
+// 매도수량 및 단가가 음수인 경우 예외처리
+// 종목 code가 비어 있는 경우 예외처리
+TEST_F(StockTradingSystemTest, TestNemoSell_Failure) {
+    //MockNemoStock mockNemo;
+    system.selectStockBroker(false);  // Nemo 선택
+
+    //EXPECT_THROW(mockNemo.sell("삼성전자", 58000.0, -100), SellException);
+}
+
+
+// 종목 code가 비어 있는 경우 예외 처리 
+TEST_F(StockTradingSystemTest, TestNemoGetPrice_Failure) {
+    //MockNemoStock mockNemo;
+    system.selectStockBroker(false);  // Nemo 선택
+
+    //EXPECT_THROW(mockNemo.getPrice(""), PriceException);
+}
+
 int main() {
 	::testing::InitGoogleMock();
 	return RUN_ALL_TESTS();
