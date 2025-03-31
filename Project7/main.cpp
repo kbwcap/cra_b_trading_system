@@ -5,9 +5,10 @@
 #include "NemoAPI.h"
 #include "KiwerAPI.h"
 #include "StockTradingSystem.h"
-
+#include "StockBroker.cpp"
 using namespace testing;
 using namespace std;
+
 
 
 
@@ -80,11 +81,7 @@ using namespace std;
 class StockTradingSystemTest : public ::testing::Test {
 protected:
     StockTradingSystem system;
-    
 };
-
-
-
 
 // Kiwer 증권사 테스트
 TEST_F(StockTradingSystemTest, TestKiwerLogin) {
@@ -105,18 +102,34 @@ TEST_F(StockTradingSystemTest, TestKiwerBuy) {
     //    .WillOnce(::testing::Return(true));  // 매수 성공
 
     //EXPECT_TRUE(system.buy("삼성전자", 10, 58000.0));
+
+    MockDriver mockDriver;
+    system.setStockBroker(&mockDriver);
+
+    EXPECT_CALL(mockDriver, buy("삼성전자", 10, 58000));
+
+    StockBroker* broker = system.getStockBroker();
+    broker->buy("삼성전자", 10, 58000);
 }
 
 TEST_F(StockTradingSystemTest, TestKiwerGetPrice) {
     //MockKiwerStock mockKiwer;
     system.selectStockBroker(true);  // Kiwer 선택
-
+    
     //EXPECT_CALL(mockKiwer, getPrice("삼성전자"))
     //    .WillOnce(::testing::Return(58200.0));  // 현재가 반환
 
     //EXPECT_EQ(system.getPrice("AAPL"), 58200.0);
-}
 
+    MockDriver mockDriver;
+    system.setStockBroker(&mockDriver);
+
+    EXPECT_CALL(mockDriver, currentPrice("삼성전자"))
+        .WillOnce(::testing::Return(58200.0));  // 현재가 반환
+
+    StockBroker* broker = system.getStockBroker();
+    EXPECT_EQ(broker->currentPrice("삼성전자"), 58200.0);
+}
 
 
 // Nemo 증권사 테스트

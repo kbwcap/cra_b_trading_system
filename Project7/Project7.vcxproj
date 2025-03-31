@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="KiwerAPI.h" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="StockBroker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
