@@ -96,7 +96,6 @@ TEST_F(StockTradingSystemTest, TestKiwerLogin) {
 
 TEST_F(StockTradingSystemTest, TestKiwerBuy) {
     //MockKiwerStock mockKiwer;
-    system.selectStockBroker(true);  // Kiwer 선택
 
     //EXPECT_CALL(mockKiwer, buy("삼성전자", 10, 58000.0))
     //    .WillOnce(::testing::Return(true));  // 매수 성공
@@ -105,16 +104,15 @@ TEST_F(StockTradingSystemTest, TestKiwerBuy) {
 
     MockDriver mockDriver;
     system.setStockBroker(&mockDriver);
-
     EXPECT_CALL(mockDriver, buy("삼성전자", 10, 58000));
 
+    system.selectStockBroker(true);  // Kiwer 선택
     StockBroker* broker = system.getStockBroker();
     broker->buy("삼성전자", 10, 58000);
 }
 
 TEST_F(StockTradingSystemTest, TestKiwerGetPrice) {
     //MockKiwerStock mockKiwer;
-    system.selectStockBroker(true);  // Kiwer 선택
     
     //EXPECT_CALL(mockKiwer, getPrice("삼성전자"))
     //    .WillOnce(::testing::Return(58200.0));  // 현재가 반환
@@ -127,6 +125,7 @@ TEST_F(StockTradingSystemTest, TestKiwerGetPrice) {
     EXPECT_CALL(mockDriver, currentPrice("삼성전자"))
         .WillOnce(::testing::Return(58200.0));  // 현재가 반환
 
+    system.selectStockBroker(true);  // Kiwer 선택
     StockBroker* broker = system.getStockBroker();
     EXPECT_EQ(broker->currentPrice("삼성전자"), 58200.0);
 }
