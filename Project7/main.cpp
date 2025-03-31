@@ -97,6 +97,28 @@ TEST_F(StockTradingSystemTest, TestKiwerLogin) {
     //EXPECT_TRUE(system.login("김윤제", "1245"));
 }
 
+TEST_F(StockTradingSystemTest, TestKiwerBuy) {
+    //MockKiwerStock mockKiwer;
+    system.selectStockBroker(true);  // Kiwer 선택
+
+    //EXPECT_CALL(mockKiwer, buy("삼성전자", 10, 58000.0))
+    //    .WillOnce(::testing::Return(true));  // 매수 성공
+
+    //EXPECT_TRUE(system.buy("삼성전자", 10, 58000.0));
+}
+
+TEST_F(StockTradingSystemTest, TestKiwerGetPrice) {
+    //MockKiwerStock mockKiwer;
+    system.selectStockBroker(true);  // Kiwer 선택
+
+    //EXPECT_CALL(mockKiwer, getPrice("삼성전자"))
+    //    .WillOnce(::testing::Return(58200.0));  // 현재가 반환
+
+    //EXPECT_EQ(system.getPrice("AAPL"), 58200.0);
+}
+
+
+
 // Nemo 증권사 테스트
 TEST_F(StockTradingSystemTest, TestNemoLogin) {
     //MockNemoStock mockNemo;
