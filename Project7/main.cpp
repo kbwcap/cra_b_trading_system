@@ -130,6 +130,28 @@ TEST_F(StockTradingSystemTest, TestNemoLogin) {
     //EXPECT_TRUE(system.login("박화영", "1245"));
 }
 
+TEST_F(StockTradingSystemTest, TestNemoBuy) {
+    //MockNemoStock mockNemo;
+    system.selectStockBroker(false);  // Nemo 선택
+
+    //EXPECT_CALL(mockNemo, buy("삼성전자", 10, 58000.0))
+    //    .WillOnce(::testing::Return(true));  // 매수 성공
+
+    //EXPECT_TRUE(system.buy("삼성전자", 10, 58000.0));
+}
+
+TEST_F(StockTradingSystemTest, TestNemoGetPrice) {
+    //MockNemoStock mockNemo;
+    system.selectStockBroker(false);  // Nemo 선택
+
+    //EXPECT_CALL(mockNemo, getPrice("삼성전자"))
+    //    .WillOnce(::testing::Return(58200.0));  // 현재가 반환
+
+    //EXPECT_EQ(system.getPrice("AAPL"), 58200.0);
+}
+
+
+
 int main() {
 	::testing::InitGoogleMock();
 	return RUN_ALL_TESTS();
